@@ -112,4 +112,32 @@ public class LineItemDAOImpl implements LineItemDAO {
             ConnectionManager.closeConnection(conn);
         }
     }
+
+    @Override
+    public Double getTotalPriceByOrderId(int orderId) throws SQLException {
+        String sql = "SELECT COALESCE(SUM(quantity * price), 0.0) AS total_price FROM dbo.LineItem WHERE order_id = ?";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Double total = 0.0;
+
+        try {
+            conn = ConnectionManager.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, orderId);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                total = rs.getDouble("total_price");
+            }
+        } catch (ClassNotFoundException e) {
+            throw new SQLException("Database driver not found: " + e.getMessage(), e);
+        } finally {
+            ConnectionManager.closeResource(rs);
+            ConnectionManager.closeResource(pstmt);
+            ConnectionManager.closeConnection(conn);
+        }
+
+        return total;
+    }
 }

@@ -40,6 +40,8 @@ public final class Constants {
 
     // SQL Statements
     public static final String SQL_GET_ALL_CUSTOMERS = "SELECT customer_id, customer_name FROM dbo.Customer";
+    public static final String SQL_GET_ALL_CUSTOMERS_EXIST_ORDER = 
+            "SELECT DISTINCT c.customer_id, c.customer_name FROM dbo.Customer c INNER JOIN dbo.Orders o ON c.customer_id = o.customer_id";
     public static final String SQL_GET_ALL_ORDERS_BY_CUSTOMER_ID = 
             "SELECT order_id, order_date, customer_id, employee_id, total FROM dbo.Orders WHERE customer_id = ?";
     public static final String SQL_GET_ALL_ITEMS_BY_ORDER_ID = 

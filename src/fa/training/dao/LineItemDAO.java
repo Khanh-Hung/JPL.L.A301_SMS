@@ -48,4 +48,13 @@ public interface LineItemDAO {
      * @throws SQLException If database access error occurs.
      */
     boolean deleteLineItem(int orderId, int productId) throws SQLException;
+
+    /**
+     * Checklist Row 19: Get total price by order ID.
+     * 
+     * @param orderId Order ID.
+     * @return Total price of line items in order.
+     * @throws SQLException If database access error occurs.
+     */
+    Double getTotalPriceByOrderId(int orderId) throws SQLException;
 }

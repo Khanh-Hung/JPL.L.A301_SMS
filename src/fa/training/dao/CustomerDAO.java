@@ -22,12 +22,20 @@ import java.util.List;
 public interface CustomerDAO {
 
     /**
-     * Requirement 1: List all customers consist of customer_id, customer_name in the database.
+     * Requirement 1 & Checklist Row 17: List all customers in the order table (exist order).
      * 
-     * @return List of Customer entities.
+     * @return List of Customer entities that have orders.
      * @throws SQLException If database access error occurs.
      */
     List<Customer> getAllCustomer() throws SQLException;
+
+    /**
+     * Retrieves all registered customers from Customer table regardless of orders.
+     * 
+     * @return List of all Customer entities in database.
+     * @throws SQLException If database access error occurs.
+     */
+    List<Customer> getAllCustomersInDb() throws SQLException;
 
     /**
      * Finds a customer by customer ID.
