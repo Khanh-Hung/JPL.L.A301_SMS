@@ -289,7 +289,13 @@ public class SaleManagement {
     private static int readInt(String prompt) {
         while (true) {
             System.out.print(prompt);
+            if (!scanner.hasNextLine()) {
+                return 11; // Exit gracefully on stream end
+            }
             String line = scanner.nextLine().trim();
+            if (line.isEmpty()) {
+                continue;
+            }
             try {
                 return Integer.parseInt(line);
             } catch (NumberFormatException e) {
@@ -301,7 +307,13 @@ public class SaleManagement {
     private static double readDouble(String prompt) {
         while (true) {
             System.out.print(prompt);
+            if (!scanner.hasNextLine()) {
+                return 0.0;
+            }
             String line = scanner.nextLine().trim();
+            if (line.isEmpty()) {
+                continue;
+            }
             try {
                 return Double.parseDouble(line);
             } catch (NumberFormatException e) {
@@ -312,6 +324,9 @@ public class SaleManagement {
 
     private static String readString(String prompt) {
         System.out.print(prompt);
+        if (!scanner.hasNextLine()) {
+            return "";
+        }
         return scanner.nextLine().trim();
     }
 }
